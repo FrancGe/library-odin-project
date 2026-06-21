@@ -1,0 +1,20 @@
+:root {
+    --color1: #84994F;
+    --color2: #FFE797;
+    --color3: #FCB53B;
+    --color4: #E6CCA9;
+    --color5: #FCFAEE;
+    --color6: #A5B68D;
+    --color7: #DA8359;
+    --color8: #E8EAA1;
+    --color9: #3D3931;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: "Lora", serif;
+    font-size: 16px;
+}
