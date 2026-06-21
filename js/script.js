@@ -46,11 +46,17 @@ function mostrarCatalogo() {
 
     const portada = document.createElement("img");
     portada.classList.add("portada-libro");
+    portada.setAttribute("style", "width: 160px; height: 225px");
     portada.src = libro.portada;
+
+    const botonVer = document.createElement("button");
+    botonVer.classList.add("boton-ver");
+    botonVer.textContent = "Ver Más";
 
     tarjeta.appendChild(titulo);
     tarjeta.appendChild(autor);
     tarjeta.appendChild(portada);
+    tarjeta.appendChild(botonVer);
     contenedorLibros.appendChild(tarjeta);
     });
 }
