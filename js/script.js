@@ -52,6 +52,7 @@ function mostrarCatalogo() {
     const botonVer = document.createElement("button");
     botonVer.classList.add("boton-ver");
     botonVer.textContent = "Ver Más";
+    botonVer.dataset.id = libro.id;
 
     tarjeta.appendChild(titulo);
     tarjeta.appendChild(autor);
@@ -62,4 +63,30 @@ function mostrarCatalogo() {
 }
 mostrarCatalogo();
 
+const modal = document.querySelector(".modal");
+function cargarModal(libro) {
+    document.querySelector(".portada-modal").src = libro.portada;
+    document.querySelector(".titulo-modal").textContent = libro.titulo;
+    document.querySelector(".autor-modal").textContent = `Autor: ${libro.autor}`;
+    document.querySelector(".descripcion-modal").textContent = libro.descripcion;
 
+    modal.showModal();
+}
+
+contenedorLibros.addEventListener("click", function(e) {
+    if(e.target.classList.contains("boton-ver")) {
+        const idSeleccionado = e.target.dataset.id;
+
+        const libroBuscado = miBiblioteca.find(libro => libro.id === idSeleccionado);
+
+        if(libroBuscado) {
+            cargarModal(libroBuscado);
+        }
+    }
+});
+
+const cerrarModal = document.querySelector(".cerrar-modal");
+
+cerrarModal.addEventListener("click", function() {
+    modal.close();
+})
