@@ -1,4 +1,4 @@
-const miBiblioteca = [];
+let miBiblioteca = [];
 
 function Libro(titulo, autor, descripcion, portada) {
     this.id = crypto.randomUUID();
@@ -6,6 +6,7 @@ function Libro(titulo, autor, descripcion, portada) {
     this.autor = autor;
     this.descripcion = descripcion;
     this.portada = portada;
+    this.leido = false;
 }
 function añadirLibro(nuevoLibro) {
     miBiblioteca.push(nuevoLibro);
@@ -26,6 +27,7 @@ añadirLibro(antifragil);
 añadirLibro(confesiones);
 añadirLibro(libroCincoAnillos);
 añadirLibro(habitosAtomicos);
+
 
 const contenedorLibros = document.querySelector(".contenedorLibros");
 function mostrarCatalogo() {
@@ -54,10 +56,23 @@ function mostrarCatalogo() {
     botonVer.textContent = "Ver Más";
     botonVer.dataset.id = libro.id;
 
+    const botonLeido = document.createElement("button");
+    botonLeido.classList.add("boton-leido");
+
+    if(libro.leido) {
+        botonLeido.textContent = "Leido";
+        botonLeido.classList.add("leido");
+    } else {
+        botonLeido.textContent = "No Leido";
+        botonLeido.classList.add("no-leido");
+    }
+    botonLeido.dataset.id = libro.id;
+
     tarjeta.appendChild(titulo);
     tarjeta.appendChild(autor);
     tarjeta.appendChild(portada);
     tarjeta.appendChild(botonVer);
+    tarjeta.appendChild(botonLeido);
     contenedorLibros.appendChild(tarjeta);
     });
 }
@@ -70,13 +85,15 @@ function cargarModal(libro) {
     document.querySelector(".autor-modal").textContent = `Autor: ${libro.autor}`;
     document.querySelector(".descripcion-modal").textContent = libro.descripcion;
 
+    const borrarLibro = document.querySelector(".borrar-libro");
+    borrarLibro.dataset.id = libro.id;
+
     modal.showModal();
 }
 
 contenedorLibros.addEventListener("click", function(e) {
     if(e.target.classList.contains("boton-ver")) {
         const idSeleccionado = e.target.dataset.id;
-
         const libroBuscado = miBiblioteca.find(libro => libro.id === idSeleccionado);
 
         if(libroBuscado) {
@@ -101,3 +118,27 @@ btnAgregarLibro.addEventListener("click", function() {
 btnCerrarFormulario.addEventListener("click", function() {
     abrirFormulario.close();
 })
+
+contenedorLibros.addEventListener("click", function (e) {
+    if(e.target.classList.contains("boton-leido")) {
+        const idSeleccionado = e.target.dataset.id;
+        const libroBuscado = miBiblioteca.find(libro => libro.id === idSeleccionado);
+
+        if(libroBuscado) {
+            libroBuscado.leido = !libroBuscado.leido;
+
+            mostrarCatalogo();
+        }
+    }
+});
+
+const botonBorrar = document.querySelector(".borrar-libro");
+botonBorrar.addEventListener("click", function(e) {
+    const idSeleccionado = e.target.dataset.id;
+
+    miBiblioteca = miBiblioteca.filter(libro => libro.id !== idSeleccionado);
+
+    modal.close();
+
+    mostrarCatalogo();
+});
