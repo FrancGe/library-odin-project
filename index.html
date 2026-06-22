@@ -16,8 +16,29 @@
 <body>
     <header class="cabecera">
         <h1 class="tituloCabecera">Bienvenido a <span>PublicRead</span></h1>
-        <p class="descripcionCabecera">Sientase libre de elegir el libro que mas guste!</p>
+        <p class="descripcionCabecera">Sientase libre de elegir el libro que mas le guste!</p>
     </header>
+
+    <button class="nuevo-libro">Agregar Libro</button>
+
+    <dialog class="agregar-libro">
+        <form action="" class="formulario-libro">
+            <h3>Agregue los libros</h3>
+            <label for="titulo">Titulo</label>
+            <input type="text" name="titulo" id="titulo" placeholder="Ej: EL Señor de los Anillos">
+
+            <label for="autor">Autor</label>
+            <input type="text" id="autor" placeholder="Ej: J. R. R. Tolkien">
+
+            <label for="descripcion">Descripción</label>
+            <textarea name="descripcion" id="descripcion"
+                placeholder="Escriba una breve descripcion del libro"></textarea>
+
+            <input class="enviar" type="submit" value="Agregar">
+
+            <button class="cerrar-formulario">Cerrar</button>
+        </form>
+    </dialog>
 
     <article class="catalogo">
         <div class="contenedorLibros"></div>

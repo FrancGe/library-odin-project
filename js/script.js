@@ -90,3 +90,14 @@ const cerrarModal = document.querySelector(".cerrar-modal");
 cerrarModal.addEventListener("click", function() {
     modal.close();
 })
+
+const btnAgregarLibro = document.querySelector(".nuevo-libro");
+const abrirFormulario = document.querySelector(".agregar-libro");
+const btnCerrarFormulario = document.querySelector(".cerrar-formulario");
+btnAgregarLibro.addEventListener("click", function() {
+    abrirFormulario.showModal();
+});
+
+btnCerrarFormulario.addEventListener("click", function() {
+    abrirFormulario.close();
+})
